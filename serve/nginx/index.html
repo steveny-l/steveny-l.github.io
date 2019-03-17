@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Install · steveny notes</title>
+        <title>Nginx · steveny notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -98,19 +98,12 @@
             
         </li>
     
-
-    
-        
-        <li class="divider"></li>
-        
-        
-    
-        <li class="chapter " data-level="2.1" >
+        <li class="chapter " data-level="1.2" >
             
                 <span>
             
                     
-                    Nginx
+                    Serve
             
                 </span>
             
@@ -119,12 +112,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="2.1.1" data-path="install.html">
+        <li class="chapter active" data-level="1.2.1" data-path="./">
             
-                <a href="install.html">
+                <a href="./">
             
                     
-                    Install
+                    Nginx
             
                 </a>
             
@@ -167,7 +160,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Install</a>
+        <a href="../.." >Nginx</a>
     </h1>
 </div>
 
@@ -182,13 +175,67 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="install">install</h1>
+                                <h1 id="install">Install</h1>
 <hr>
-<h2 id="step-one-install-make">Step one install make</h2>
-<p><code>yum -y install gcc automake autoconf libtool make</code></p>
-<h2 id="step-two-install-g">Step two install g++</h2>
-<p><code>yum -y install gcc gcc-c++</code></p>
+<h2 id="env">Env</h2>
+<p>CentOS 7.4</p>
+<h2 id="install-make">Install make</h2>
+<pre><code>  yum -y install gcc automake autoconf libtool make
+</code></pre><h2 id="install-g">Install g++</h2>
+<pre><code>  yum -y install gcc gcc-c++
+</code></pre><h2 id="install-pcre">Install pcre</h2>
+<p>Check pcre version</p>
+<p><a href="ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/" target="_blank">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/</a></p>
+<pre><code>  cd /usr/local/src
 
+  wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.43.tar.gz
+
+  tar -zxvf pcre-8.43.tar.gz &amp;&amp; cd pcre-8.43
+
+  ./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h2 id="install-zlib">Install zlib</h2>
+<p>Check zlib version</p>
+<p><a href="http://www.zlib.net/" target="_blank">http://www.zlib.net/</a></p>
+<pre><code>  cd /usr/local/src
+
+  wget http://zlib.net/zlib-1.2.11.tar.gz
+
+  tar -zxvf zlib-1.2.11.tar.gz &amp;&amp; cd zlib-1.2.11
+
+  ./configure &amp;&amp; make &amp;&amp; make install
+</code></pre><h2 id="install-openssl">Install openssl</h2>
+<p>Check openssl version</p>
+<p><a href="ftp://ftp.openssl.org/source/" target="_blank">ftp://ftp.openssl.org/source/</a></p>
+<pre><code>  cd /usr/local/src
+
+  wget http://www.openssl.org/source/openssl-1.0.2r.tar.gz
+
+  tar -zxvf openssl-1.0.2r.tar.gz &amp;&amp; cd openssl-1.0.2r
+
+  ./config &amp;&amp; make &amp;&amp; make install
+</code></pre><h2 id="install-nginx">Install nginx</h2>
+<p>Check nginx version</p>
+<p><a href="http://nginx.org/en/download.html" target="_blank">http://nginx.org/en/download.html</a></p>
+<pre><code>  cd /usr/local/src
+
+  wget http://nginx.org/download/nginx-1.14.2.tar.gz
+
+  tar -zxvf nginx-1.14.2.tar.gz &amp;&amp; cd nginx-1.14.2
+
+  ./configure --sbin-path=/usr/local/nginx/nginx \--conf-path=/usr/local/src/nginx/nginx.conf \--pid-path=/usr/local/src/nginx/nginx.pid \--with-http_ssl_module \--with-pcre=/usr/local/src/pcre-8.43 \--with-zlib=/usr/local/src/zlib-1.2.11 \--with-openssl=/usr/local/src/openssl-1.0.2r
+
+  make &amp;&amp; make install
+
+  /usr/sbin/groupadd www
+
+  /usr/sbin/useradd -g www www
+</code></pre><h2 id="run-nginx">Run nginx</h2>
+<pre><code>  /usr/sbin/groupadd www
+
+  /usr/sbin/useradd -g www www
+
+  /usr/local/nginx/nginx
+</code></pre>
                                 
                                 </section>
                             
@@ -223,7 +270,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Install","level":"2.1.1","depth":2,"previous":{"title":"Nginx","level":"2.1","depth":1,"ref":"","articles":[{"title":"Install","level":"2.1.1","depth":2,"path":"serve/nginx/install.md","ref":"serve/nginx/install.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/nginx/install.md","mtime":"2019-03-15T02:02:41.733Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-15T02:54:27.625Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Nginx","level":"1.2.1","depth":2,"previous":{"title":"Serve","level":"1.2","depth":1,"ref":"","articles":[{"title":"Nginx","level":"1.2.1","depth":2,"path":"serve/nginx/README.md","ref":"serve/nginx/README.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/nginx/README.md","mtime":"2019-03-15T09:57:49.220Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-03-17T14:46:49.542Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
