@@ -219,17 +219,21 @@
 </code></pre><p>Write this config in mongodb.conf</p>
 <pre><code>
   dbpath = /data/mongodb/data
-
   logpath = /data/mongodb/logs/mongodb.log
-
+  bind_ip = 0.0.0.0
   port = 2728
-
   fork = true
 </code></pre><p>Save &amp; Start mongodb</p>
 <pre><code>
   cd /usr/local/mongodb/bin
 
   ./mongod &#x2013;config /data/mongodb/mongodb.conf
+</code></pre><p>Check mongodb</p>
+<pre><code>
+ps aux |grep mongodb
+</code></pre><p>kill mongodb</p>
+<pre><code>
+kill -9 PID
 </code></pre>
                                 
                                 </section>
@@ -269,7 +273,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Mongodb","level":"1.2.2","depth":2,"previous":{"title":"Nginx","level":"1.2.1","depth":2,"path":"serve/nginx/README.md","ref":"serve/nginx/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/mongodb/README.md","mtime":"2019-04-22T13:38:10.515Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-22T13:38:38.857Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mongodb","level":"1.2.2","depth":2,"previous":{"title":"Nginx","level":"1.2.1","depth":2,"path":"serve/nginx/README.md","ref":"serve/nginx/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/mongodb/README.md","mtime":"2019-04-22T14:18:04.818Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-04-23T00:57:20.350Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
