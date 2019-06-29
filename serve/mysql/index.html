@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Mongodb · steveny notes</title>
+        <title>Mysql · steveny notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,8 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../mysql/" />
     
-    
-    <link rel="prev" href="../nginx/" />
+    <link rel="prev" href="../mongodb/" />
     
 
     </head>
@@ -129,9 +127,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2" data-path="./">
+        <li class="chapter " data-level="1.2.2" data-path="../mongodb/">
             
-                <a href="./">
+                <a href="../mongodb/">
             
                     
                     Mongodb
@@ -142,9 +140,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="../mysql/">
+        <li class="chapter active" data-level="1.2.3" data-path="./">
             
-                <a href="../mysql/">
+                <a href="./">
             
                     
                     Mysql
@@ -190,7 +188,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Mongodb</a>
+        <a href="../.." >Mysql</a>
     </h1>
 </div>
 
@@ -209,41 +207,52 @@
 <hr>
 <h2 id="env">Env</h2>
 <p>CentOS 7.4</p>
-<h2 id="install-mongodb">Install mongodb</h2>
-<h3 id="1&#x3001;check-mongodb-version">1&#x3001;Check mongodb version</h3>
-<p><a href="https://www.mongodb.com/download-center/community" target="_blank">https://www.mongodb.com/download-center/community</a></p>
+<h2 id="install-mysql">Install mysql</h2>
+<h3 id="1&#x3001;check-mysql-version">1&#x3001;Check mysql version</h3>
+<p><a href="https://dev.mysql.com/downloads/repo/yum/" target="_blank">https://dev.mysql.com/downloads/repo/yum/</a></p>
 <pre><code>  cd /usr/local/src
 
-  wget https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.9.tgz
+  wget http://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
 
-  tar -zxvf mongodb-linux-x86_64-4.0.9.tgz
+  rpm -ivh mysql80-community-release-el7-3.noarch.rpm
 
-  mv mongodb-linux-x86_64-4.0.9 /usr/local/mongodb
-</code></pre><h3 id="2&#x3001;set-up-config">2&#x3001;Set up config</h3>
-<pre><code>  cd /
+  yum update
 
-  mkdir -p data/mongodb/db
+  yum install mysql-server
+</code></pre><h3 id="2&#x3001;init-mysql">2&#x3001;Init mysql</h3>
+<pre><code>  mysqld --initialize
+</code></pre><h3 id="3&#x3001;set-jurisdiction">3&#x3001;Set jurisdiction</h3>
+<pre><code>  chown mysql:mysql -R /var/lib/mysql
+</code></pre><h3 id="4&#x3001;start-mysql">4&#x3001;Start mysql</h3>
+<pre><code>  systemctl start mysqld
+</code></pre><h3 id="5&#x3001;check-mysql-status">5&#x3001;Check mysql status</h3>
+<pre><code>systemctl status mysqld
+</code></pre><h2 id="reset-password">Reset password</h2>
+<h3 id="1&#x3001;open-mycnf-and-add-skip-grant-tables-after-mysqld">1&#x3001;Open my.cnf, and add <code>skip-grant-tables</code> after <code>[mysqld]</code></h3>
+<pre><code>  vi /etc/my.cnf
+</code></pre><pre><code>  ...
 
-  mkdir -p data/mongodb/logs
+  [mysqld]
+  skip-grant-tables
 
-  cd data/mongodb
+  ...
+</code></pre><h3 id="2&#x3001;restart-mysql">2&#x3001;Restart mysql</h3>
+<pre><code>  service mysqld restart
+</code></pre><h3 id="3&#x3001;reset-password">3&#x3001;Reset password</h3>
+<pre><code>  mysql
 
-  vi mongodb.conf
-</code></pre><h3 id="3&#x3001;write-this-config-in-mongodbconf">3&#x3001;Write this config in mongodb.conf</h3>
-<pre><code>  dbpath = /data/mongodb/data
-  logpath = /data/mongodb/logs/mongodb.log
-  bind_ip = 0.0.0.0
-  port = 2728
-  fork = true
-</code></pre><h3 id="4&#x3001;save--start-mongodb">4&#x3001;Save &amp; Start mongodb</h3>
-<pre><code>  cd /usr/local/mongodb/bin
+  update user set authentication_string=password(&apos;11232123&apos;) where user=&apos;root&apos;;
 
-  ./mongod &#x2013;config /data/mongodb/mongodb.conf
-</code></pre><h3 id="5&#x3001;check-mongodb">5&#x3001;Check mongodb</h3>
-<pre><code>ps aux |grep mongodb
-</code></pre><h2 id="others">others</h2>
-<p>kill mongodb</p>
-<pre><code>kill -9 PID
+  flush privileges;
+
+  exit;
+</code></pre><h3 id="4&#x3001;open-mycnf-and-remove-skip-grant-tables">4&#x3001;Open my.cnf, and remove <code>skip-grant-tables</code></h3>
+<pre><code>  vi /etc/my.cnf
+</code></pre><pre><code>  ...
+
+  [mysqld]
+
+  ...
 </code></pre>
                                 
                                 </section>
@@ -271,14 +280,10 @@
 
             
                 
-                <a href="../nginx/" class="navigation navigation-prev " aria-label="Previous page: Nginx">
+                <a href="../mongodb/" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Mongodb">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
-                
-                <a href="../mysql/" class="navigation navigation-next " aria-label="Next page: Mysql">
-                    <i class="fa fa-angle-right"></i>
-                </a>
                 
             
         
@@ -287,7 +292,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Mongodb","level":"1.2.2","depth":2,"next":{"title":"Mysql","level":"1.2.3","depth":2,"path":"serve/mysql/README.md","ref":"serve/mysql/README.md","articles":[]},"previous":{"title":"Nginx","level":"1.2.1","depth":2,"path":"serve/nginx/README.md","ref":"serve/nginx/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/mongodb/README.md","mtime":"2019-06-29T01:20:13.987Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-29T01:20:51.242Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Mysql","level":"1.2.3","depth":2,"previous":{"title":"Mongodb","level":"1.2.2","depth":2,"path":"serve/mongodb/README.md","ref":"serve/mongodb/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/mysql/README.md","mtime":"2019-06-29T01:18:56.567Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-06-29T01:20:51.242Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
