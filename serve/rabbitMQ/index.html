@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Redis · steveny notes</title>
+        <title>RabbitMQ · steveny notes</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../rabbitMQ/" />
+    <link rel="next" href="../docker/" />
     
     
-    <link rel="prev" href="../mysql/" />
+    <link rel="prev" href="../redis/" />
     
 
     </head>
@@ -168,9 +168,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.5" data-path="./">
+        <li class="chapter " data-level="1.2.5" data-path="../redis/">
             
-                <a href="./">
+                <a href="../redis/">
             
                     
                     Redis
@@ -181,9 +181,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.6" data-path="../rabbitMQ/">
+        <li class="chapter active" data-level="1.2.6" data-path="./">
             
-                <a href="../rabbitMQ/">
+                <a href="./">
             
                     
                     RabbitMQ
@@ -242,7 +242,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Redis</a>
+        <a href="../.." >RabbitMQ</a>
     </h1>
 </div>
 
@@ -260,28 +260,18 @@
                                 <h1 id="install">Install</h1>
 <hr>
 <h2 id="env">Env</h2>
-<p>CentOS 7.4</p>
-<h2 id="install-redis">Install redis</h2>
-<h3 id="1&#x3001;check-redis-version">1&#x3001;Check redis version</h3>
-<p><a href="https://redis.io/download" target="_blank">https://redis.io/download</a></p>
-<pre><code>  cd /usr/local/src
-
-  wget http://download.redis.io/releases/redis-5.0.6.tar.gz
-
-  tar xzf redis-5.0.6.tar.gz
-
-  cd redis-5.0.6
-
-  make
-</code></pre><h3 id="3&#x3001;by-default-redis-does-not-run-as-a-daemon-change-daemonize-to-yes-in-redis-config">3&#x3001;By default Redis does not run as a daemon. Change &apos;daemonize&apos; to &apos;yes&apos; in redis config</h3>
-<h3 id="4&#x3001;run-redis-with-conf">4&#x3001;Run Redis with conf</h3>
-<pre><code>  cd src
-
-  ./redis-server ../redis.conf
-</code></pre><h3 id="5&#x3001;others">5&#x3001;Others</h3>
-<p>  about Mac OS X&apos;s plist permissions</p>
-<pre><code>  sudo chown root /Library/LaunchDaemons/xxx.plist
-  sudo chgrp wheel /Library/LaunchDaemons/xxx.plist
+<p>CentOS 8.0</p>
+<h3 id="1&#x3001;install-socat">1&#x3001;Install socat</h3>
+<pre><code>  yum install -y socat
+</code></pre><h3 id="2&#x3001;find-out-rabbitmq-erlang-version-requirements-and-download-rpm-package">2&#x3001;Find out RabbitMQ Erlang version requirements and download rpm package</h3>
+<p><a href="https://www.rabbitmq.com/which-erlang.html" target="_blank">https://www.rabbitmq.com/which-erlang.html</a></p>
+<p>download erlang-22.2.6-1.el8.x86_64.rpm
+<a href="https://github.com/rabbitmq/erlang-rpm/releases" target="_blank">Erlang download</a></p>
+<p>download rabbitmq-server-3.8.2-1.el8.noarch.rpm
+<a href="https://www.rabbitmq.com/install-rpm.html#downloads" target="_blank">RabbitMQ download</a></p>
+<h3 id="3&#x3001;install-erlang-and-rabbitmq">3&#x3001;Install Erlang and RabbitMQ</h3>
+<pre><code>  rpm -ivh erlang-22.2.6-1.el8.x86_64.rpm
+  rpm -ivh rabbitmq-server-3.8.2-1.el8.noarch.rpm
 </code></pre>
                                 
                                 </section>
@@ -309,12 +299,12 @@
 
             
                 
-                <a href="../mysql/" class="navigation navigation-prev " aria-label="Previous page: Mysql">
+                <a href="../redis/" class="navigation navigation-prev " aria-label="Previous page: Redis">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../rabbitMQ/" class="navigation navigation-next " aria-label="Next page: RabbitMQ">
+                <a href="../docker/" class="navigation navigation-next " aria-label="Next page: Docker">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -325,7 +315,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Redis","level":"1.2.5","depth":2,"next":{"title":"RabbitMQ","level":"1.2.6","depth":2,"path":"serve/rabbitMQ/README.md","ref":"serve/rabbitMQ/README.md","articles":[]},"previous":{"title":"Mysql","level":"1.2.4","depth":2,"path":"serve/mysql/README.md","ref":"serve/mysql/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/redis/README.md","mtime":"2020-02-22T15:09:04.345Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-25T15:08:54.440Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"RabbitMQ","level":"1.2.6","depth":2,"next":{"title":"Docker","level":"1.2.7","depth":2,"path":"serve/docker/README.md","ref":"serve/docker/README.md","articles":[]},"previous":{"title":"Redis","level":"1.2.5","depth":2,"path":"serve/redis/README.md","ref":"serve/redis/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"steveny notes","gitbook":"*"},"file":{"path":"serve/rabbitMQ/README.md","mtime":"2020-02-25T09:12:14.601Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-09-25T15:08:54.440Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
